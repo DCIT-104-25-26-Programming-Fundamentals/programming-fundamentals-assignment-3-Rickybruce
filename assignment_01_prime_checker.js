@@ -41,6 +41,3 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
-
-
-// this is how to commit and push to gitHub
