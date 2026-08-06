@@ -58,3 +58,34 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+const readline = require("readline-sync")
+function singleMultiplication(N){
+    for(let i =1; i<=12; i++){
+         console.log(`${N} x ${i} = ${i*N}`)
+    }
+}
+function multiplication(num){
+    for(let j = 1; j <=num ; j++){
+        for(let i =1; i<=12; i++){
+         console.log(`${j} x ${i} = ${i*j}`)
+        }
+        console.log("---------------------------")
+    }
+}
+function main(){
+    const N = readline.questionInt("Enter number? ");
+    if(typeof(N)===String || N<0){
+         console.log("Error: Invalid input");
+         return;
+    }
+    singleMultiplication(N);
+
+    const num = readline.questionInt("Enter number? ");
+    if(typeof(num)===String || N<0){
+        console.log("Error: Invalid input");
+        return;
+    }
+    multiplication(num);
+}
+
+main();

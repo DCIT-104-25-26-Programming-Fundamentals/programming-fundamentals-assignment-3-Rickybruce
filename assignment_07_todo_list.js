@@ -81,4 +81,72 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+function addTask(todos){
+    let newTodo = readline.question("Enter task: ");
+    todos.push(newTodo);
+    return console.log(`Task added: \"${newTodo}\"`);
+}
+function viewTask(todos){
+    if (todos.length === 0) {
+        console.log("No tasks found.");
+        return;
+    }
 
+    for (let i = 0; i < todos.length; i++) {
+        console.log(`${i + 1}. ${todos[i]}`);
+    }
+}
+function deleteTask(todos){
+    if (todos.length === 0) {
+        console.log("No tasks to delete.");
+        return;
+    }
+
+    viewTask(todos);
+    const delIndex = readline.questionInt("Enter task number to delete: ") - 1;
+    if (delIndex < 0 || delIndex >= todos.length) {
+        console.log("Error: Todo not found");
+        return;
+    }
+
+    const removedTask = todos.splice(delIndex, 1)[0];
+    todos.filter((todo)=> todo != removedTask)
+    console.log(`Task "${removedTask}" has been removed`);
+}
+const readline = require("readline-sync")
+function main(){
+    console.log(`
+    ============================
+        TO-DO LIST MENU
+    ============================
+    1. Add task
+    2. View tasks
+    3. Delete task
+    4. Quit
+        `)
+
+    let todos = [];
+    let input = readline.questionInt("Enter your choice (1-4): ");
+
+    while (true) {
+        if (input < 1 || input > 4) {
+            console.log("Error: Invalid input");
+            input = readline.questionInt("Enter your choice (1-4): ");
+            continue;
+        }
+        if (input === 4) {
+            console.log("Goodbye");
+            break;
+        }
+        if (input === 1) {
+            addTask(todos);
+        } else if (input === 2) {
+            viewTask(todos);
+        } else if (input === 3) {
+            deleteTask(todos);
+        }
+        input = readline.questionInt("Enter your choice (1-4): ");
+    }
+}
+
+main();

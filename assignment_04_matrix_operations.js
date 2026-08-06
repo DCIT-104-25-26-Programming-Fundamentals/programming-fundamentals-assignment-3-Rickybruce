@@ -67,6 +67,11 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+function main(){
+    const readline = require("readline-sync");
+    const Number = readline.questionInt("Enter a number : ")
+    console.log(Number)
+}
 
-const readlineSync = require('readline-sync');
+main()
 
