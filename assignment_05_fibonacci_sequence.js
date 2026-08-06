@@ -53,5 +53,53 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+function getFibSequence(N){
+    let sequence =[];
+    for(let i = 0; i<N ;i++){
+        if(i===0){
+            sequence.push(0);
+        }else if(i===1){
+            sequence.push(1);
+        }else{
+            sequence.push(sequence[i-1]+sequence[i-2]);
+        }
+    }
+    return sequence;
+}
+function checkForFib(fibNum){
 
+    if (fibNum < 0) return false;
+    
+    let a = 0;
+    let b = 1;
+    
+    while (a < fibNum) {
+        const temp = a + b;
+        a = b;
+        b = temp;
+    }
+    
+    return a === fibNum;
 
+    }
+
+function main(){
+    const readline = require("readline-sync");
+    const N = readline.questionInt("How many terms? ");
+
+    if (N <= 0) {
+        console.log("Error: N must be a positive integer.");
+        return;
+    }
+
+    console.log(`Fibonacci sequence: ${getFibSequence(N).join(" ")}`);
+
+    const fibNum = readline.questionInt("Enter a number to check: ");
+    if (checkForFib(fibNum)) {
+        console.log(`${fibNum} is a Fibonacci number.`);
+    } else {
+        console.log(`${fibNum} is NOT a Fibonacci number.`);
+    }
+}
+
+main();

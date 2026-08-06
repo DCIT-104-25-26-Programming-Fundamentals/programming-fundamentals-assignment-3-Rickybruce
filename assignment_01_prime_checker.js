@@ -41,3 +41,37 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+
+ function isPrime(n){
+    if(n < 2){
+        return  false;
+    }
+    else if (n ==2 || n==3){
+      return true;
+    }
+    else if (n%2 == 0 || n%3 == 0){
+      return false;
+    }
+    else{
+      for (let i = 5; i * i <= n; i += 6) {
+         if (n % i == 0 || n % (i + 2) == 0) {
+            return false;
+         }
+      }
+    }
+    return true;
+ };
+
+function main(){
+    const readline = require('readline-sync');
+    let n = readline.questionInt('Enter a number: ');
+    if (isPrime(n)) {
+          console.log(`${n} is a prime number.`);
+    } else {
+          console.log(`${n} is NOT a prime number.`);
+    }
+}
+
+main();
+
+

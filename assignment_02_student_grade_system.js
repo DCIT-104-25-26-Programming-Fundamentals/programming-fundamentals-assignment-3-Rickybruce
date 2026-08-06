@@ -48,5 +48,34 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+function getGrade(n){
+    if (n > 100 || n < 0) {
+        return null;
+    }
 
+    if (n >= 80) {
+        return "A";
+    } else if (n >= 70) {
+        return "B";
+    } else if (n >= 60) {
+        return "C";
+    } else if (n >= 50) {
+        return "D";
+    } else {
+        return "F";
+    }
+}
 
+function main(){
+    const readline = require("readline-sync");
+    let n = readline.questionInt("Enter student score (0-100): ");
+    const grade = getGrade(n);
+
+    if (grade === null) {
+        console.log("Error: Score must be between 0 and 100.");
+    } else {
+        console.log(`Grade: ${grade}`);
+    }
+}
+
+main();

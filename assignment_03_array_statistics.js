@@ -42,5 +42,54 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+function Sum(nums){
+    let total = 0;
+    let j = nums.length;
+    for (let i=0; i< j ;i++){
+        total += nums[i];
+    }
+    return total;
+}
+function Average(nums){
+    let mean = Sum(nums)/nums.length;
+    return mean.toFixed(2);
+}
+function Maximun(nums){
+    let maximumNum = nums[0];
+    for(let i =1 ;i < nums.length ;i++ ){
+        if (nums[i]>maximumNum){
+            maximumNum =nums[i];
+        }
+    }
+    return maximumNum;
+}
+function Minimum(nums){
+    let smallestNum = nums[0];
+    for(let i =1 ;i < nums.length ;i++ ){
+        if (nums[i]<smallestNum){
+            smallestNum =nums[i];
+        }
+    }
+    return smallestNum;
+}
+function main (){
+    const readline = require("readline-sync");
+    const n = readline.questionInt("How many numbers? ");
+    if (n <= 0) {
+    console.log("Error: Number of items must be positive.");
+    return;
+    }
 
+    let nums = [];
+    for (let i = 1; i <= n ; i++){
+        let num = readline.questionFloat(`Enter number ${i}: `);
+        nums.push(num);
+    }
 
+    console.log("Result");
+    console.log(`Sum:         ${Sum(nums)}`);
+    console.log(`Average:     ${Average(nums)}`);
+    console.log(`Maximun:     ${Maximun(nums)}`)
+    console.log(`Minimum:     ${Minimum(nums)}`)
+}
+main();
