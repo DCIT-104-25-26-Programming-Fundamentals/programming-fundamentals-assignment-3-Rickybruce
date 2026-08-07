@@ -110,7 +110,6 @@ function deleteTask(todos){
     }
 
     const removedTask = todos.splice(delIndex, 1)[0];
-    todos.filter((todo)=> todo != removedTask)
     console.log(`Task "${removedTask}" has been removed`);
 }
 const readline = require("readline-sync")

@@ -84,4 +84,101 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readline = require("readline-sync");
+function verification(studentData, studentId){
+    for (let i = 0; i < studentData.length; i++) {
+        if (studentData[i].id === studentId) {
+            return { found: true, index: i };
+        }
+    }
+    return { found: false, index: -1 };
+}
+function addStudent(studentData){
+    const student = {};
+    student.name = readline.question("Student name: ");
+    student.id = readline.questionInt("Student ID: ");
+    const numScores = readline.questionInt("How many scores? ");
+    student.scores = [];
+    for (let i = 1; i <= numScores; i++) {
+        const score = readline.questionInt(`Enter score ${i}: `);
+        student.scores.push(score);
+    }
 
+    studentData.push(student);
+    console.log(`Student "${student.name}" added successfully.`);
+}
+
+function averageScore(studentData){
+    const studentId = readline.questionInt("Enter student ID: ");
+    const ver = verification(studentData, studentId);
+
+    if (ver.found) {
+        const scores = studentData[ver.index].scores;
+        if (scores.length === 0) {
+            console.log(`${studentData[ver.index].name} has no scores yet.`);
+            return;
+        }
+
+        let total = 0;
+        for (let i = 0; i < scores.length; i++) {
+            total += scores[i];
+        }
+        const average = (total / scores.length).toFixed(2);
+        console.log(`${studentData[ver.index].name}'s average score: ${average}`);
+    } else {
+        console.log("Student ID not found");
+    }
+}
+
+function displayAllStudent(studentData){
+    if (studentData.length === 0) {
+        console.log("No students have been added yet.");
+        return;
+    }
+
+    console.log(`=========================================================
+     Name     Student ID         Scores        Average 
+ ========================================================= `);
+
+    for (let i = 0; i < studentData.length; i++) {
+        const student = studentData[i];
+        const scores = student.scores;
+        const total = scores.reduce((sum, score) => sum + score, 0);
+        const average = scores.length === 0 ? 0 : (total / scores.length).toFixed(2);
+
+        console.log(`${student.name}   ${student.id}    ${scores.join(", ")}    ${average}`);
+    }
+}
+
+function main(){
+    let studentData = [];
+    console.log(`
+   ================================
+      STUDENT RECORD SYSTEM MENU
+   ================================
+   1. Add student
+   2. Display all students
+   3. Calculate average score
+   4. Quit
+    `);
+
+    while (true) {
+        const input = readline.questionInt("Enter your choice (1-4): ");
+        if (input > 4 || input < 1) {
+            console.log("Error: Invalid input choice must be from 1 to 4");
+            continue;
+        }
+        if (input === 4) {
+            console.log("Goodbye!");
+            return;
+        } else if (input === 1) {
+            addStudent(studentData);
+        }else if(input === 2){
+            displayAllStudent(studentData);
+        }else if(input ===3){
+            averageScore(studentData);
+        }
+    }
+}
+
+main()

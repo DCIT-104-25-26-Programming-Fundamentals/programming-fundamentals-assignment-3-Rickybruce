@@ -67,11 +67,105 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
-function main(){
-    const readline = require("readline-sync");
-    const Number = readline.questionInt("Enter a number : ")
-    console.log(Number)
+const readline = require("readline-sync");
+
+function readMatrix(rows, cols, label) {
+    const matrix = [];
+    for (let r = 1; r <= rows; r++) {
+        const rowInput = readline.question(`Enter row ${r} of ${label}: `);
+        const row = rowInput.split(" ").map(Number);
+        if (row.length !== cols || row.some(value => Number.isNaN(value))) {
+            console.log("Error: Please enter the correct number of numeric values.");
+            r--;
+            continue;
+        }
+        matrix.push(row);
+    }
+    return matrix;
 }
 
-main()
+function transpose(matrix) {
+    const rows = matrix.length;
+    const cols = matrix[0].length;
+    const result = [];
+
+    for (let c = 0; c < cols; c++) {
+        const newRow = [];
+        for (let r = 0; r < rows; r++) {
+            newRow.push(matrix[r][c]);
+        }
+        result.push(newRow);
+    }
+    return result;
+}
+
+function addMatrices(A, B) {
+    const rows = A.length;
+    const cols = A[0].length;
+    const result = [];
+
+    for (let r = 0; r < rows; r++) {
+        const row = [];
+        for (let c = 0; c < cols; c++) {
+            row.push(A[r][c] + B[r][c]);
+        }
+        result.push(row);
+    }
+    return result;
+}
+
+function multiplyMatrices(A, B) {
+    const rowsA = A.length;
+    const colsA = A[0].length;
+    const colsB = B[0].length;
+    const result = [];
+
+    for (let r = 0; r < rowsA; r++) {
+        const row = [];
+        for (let c = 0; c < colsB; c++) {
+            let sum = 0;
+            for (let k = 0; k < colsA; k++) {
+                sum += A[r][k] * B[k][c];
+            }
+            row.push(sum);
+        }
+        result.push(row);
+    }
+    return result;
+}
+
+function printMatrix(matrix) {
+    for (let r = 0; r < matrix.length; r++) {
+        console.log(matrix[r].join(" "));
+    }
+}
+
+function main() {
+    console.log("Matrix Transpose, Addition, and Multiplication\n");
+
+    const rowsA = readline.questionInt("Enter number of rows for matrix A: ");
+    const colsA = readline.questionInt("Enter number of columns for matrix A: ");
+    const matrixA = readMatrix(rowsA, colsA, "A");
+
+    console.log("\nTranspose of matrix A:");
+    printMatrix(transpose(matrixA));
+
+    const rowsB = rowsA;
+    const colsB = colsA;
+    console.log("\nEnter matrix B for addition (same dimensions as A):");
+    const matrixB = readMatrix(rowsB, colsB, "B");
+
+    console.log("\nA + B:");
+    printMatrix(addMatrices(matrixA, matrixB));
+
+    const rowsC = colsA;
+    const colsC = readline.questionInt("\nEnter number of columns for matrix B in multiplication: ");
+    console.log("Enter matrix B for multiplication:");
+    const matrixC = readMatrix(rowsC, colsC, "B");
+
+    console.log("\nA x B:");
+    printMatrix(multiplyMatrices(matrixA, matrixC));
+}
+
+main();
 

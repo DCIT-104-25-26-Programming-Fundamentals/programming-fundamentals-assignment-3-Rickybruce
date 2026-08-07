@@ -105,37 +105,45 @@ function main(){
    6. Exponentiation
    7. Quit
         `)
-    
-    
-    while (true){
+
+    while (true) {
         const choice = readline.questionInt("Select an operation (1-7): ");
-        if(choice < 1 || choice > 7){
-            console.warn("Error: Number must be from 1-7")
+        if (choice < 1 || choice > 7) {
+            console.warn("Error: Choice must be from 1-7.");
+            continue;
         }
-        if( choice === 7){
-            console.log("Goodbye")
+        if (choice === 7) {
+            console.log("Goodbye");
             break;
         }
+
         const firstNum = readline.questionFloat("Enter first number : ");
         const secondNum = readline.questionFloat("Enter second number : ");
-        if(choice ===1 ){
-            console.log(`Result: ${firstNum}+${secondNum} = ${addition(firstNum,secondNum)} `)
-        }else if(choice === 2){
-            console.log(`Result: ${firstNum}-${secondNum} = ${subtraction(firstNum,secondNum)} `)
-        }else if( choice === 3){
-            console.log(`Result: ${firstNum}*${secondNum} = ${multiplication(firstNum,secondNum)} `)
-        }else if( choice ===4 ){
-            if( secondNum ===0){
-                console.log("Error: Cannot divide by zero.")
-            }else{
-                result = division(firstNum,secondNum)
-                console.log(`Result: ${firstNum}/${secondNum} = ${result.toFixed(2)} `)
+        let result;
+
+        if (choice === 1) {
+            result = addition(firstNum, secondNum);
+            console.log(`Result: ${firstNum} + ${secondNum} = ${result.toFixed(2)}`);
+        } else if (choice === 2) {
+            result = subtraction(firstNum, secondNum);
+            console.log(`Result: ${firstNum} - ${secondNum} = ${result.toFixed(2)}`);
+        } else if (choice === 3) {
+            result = multiplication(firstNum, secondNum);
+            console.log(`Result: ${firstNum} * ${secondNum} = ${result.toFixed(2)}`);
+        } else if (choice === 4) {
+            if (secondNum === 0) {
+                console.log("Error: Cannot divide by zero.");
+            } else {
+                result = division(firstNum, secondNum);
+                console.log(`Result: ${firstNum} / ${secondNum} = ${result.toFixed(2)}`);
             }
-        }else if(choice === 5){
-            console.log(`Result: ${firstNum}%${secondNum} = ${mod(firstNum,secondNum)} `)
-        }else if(choice === 6){
-            console.log(`Result: ${firstNum}**${secondNum} = ${exponentiation(firstNum,secondNum)} `)
+        } else if (choice === 5) {
+            result = mod(firstNum, secondNum);
+            console.log(`Result: ${firstNum} % ${secondNum} = ${result.toFixed(2)}`);
+        } else if (choice === 6) {
+            result = exponentiation(firstNum, secondNum);
+            console.log(`Result: ${firstNum} ** ${secondNum} = ${result.toFixed(2)}`);
         }
-}
+    }
 }
 main();
